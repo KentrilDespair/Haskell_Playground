@@ -6,7 +6,7 @@ Make
 GHC
 
 # How to run
-  $ make
-  $ ./playground
-or
-  $ make run
+  $ make  
+  $ ./playground  
+or  
+  $ make run  
