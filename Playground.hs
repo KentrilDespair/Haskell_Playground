@@ -224,8 +224,8 @@ fibFast n
     | n == 1 = 1
     | n == 2 = 1
     | otherwise = f 0 1 0
-    where f k m i = if i == n then k
-                    else f m (k+m) (i+1)
+    where f n_2 n_1 i = if i == n then n_2
+                    else f n_1 (n_2 + n_1) (i+1)
 
 
 -- quick sort
@@ -241,16 +241,27 @@ quickSort (x:xs) = quickSort smaller ++ [x] ++ quickSort bigger
     where smaller = [i | i <- xs, i <= x]
           bigger = [k | k <- xs, k > x]
 
---
---
+--------------------------------------------------------------------------------
 -- High order functions
---
--- zipWith
---
--- flip
---
--- more look it up
---
--- vector
---
---
+
+zipWith' :: (a -> b -> c) -> [a] -> [b] -> [c]
+zipWith' _ [] _ = []
+zipWith' _ _ [] = []
+zipWith' f (x:xs) (y:ys) = f x y : zipWith' f xs ys
+
+flip' :: (a -> b -> c) -> b -> a -> c
+flip' f x y = f y x
+
+map' :: (a -> b) -> [a] -> [b]
+map' _ [] = []
+map' f (x:xs) = f x : map' f xs
+
+filter' :: (a -> Bool) -> [a] -> [a]
+filter' _ [] = []
+filter' f (x:xs) = if f x then x : filter' f xs
+                   else filter' f xs
+
+-- Find the largest number under 100,000 that's divisible by 3829
+largestDivisble :: (Integral a) => a
+largestDivisble = head $ filter d [99999,99998..]
+    where d x = x `mod` 3829 == 0

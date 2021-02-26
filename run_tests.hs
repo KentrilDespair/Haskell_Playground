@@ -89,6 +89,13 @@ test x
     | fib 8 /= 21 = error "fib"
     | fibFast 8 /= 21 = error "fibfast"
     | fibFast 100 /= 354224848179261915075 = error "fibfast"
+    | zipWith' (+) [4,2,5,6] [2,6,2,3]   /= [6,8,7,9] = error "zipWith"
+    | zipWith' (max) [4,2,5,6] [2,6,2,3] /= [4,6,5,6] = error "zipWith"
+    | flip' zip [1,2,3,4,5] "hello" /= [('h',1),('e',2),('l',3),('l',4),('o',5)] = error "flip"
+    | map' (+3) [1,5,3,1,6] /= [4,8,6,4,9] = error "map"
+    | (null $ map' (+3) []) /= True = error "map"
+    | (null $ filter' (>3) []) /= True = error "filter"
+    | filter' even [1..10] /= [2,4,6,8,10] = error "filter"
     | otherwise = "All ok"
 
 
