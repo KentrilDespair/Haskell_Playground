@@ -1,9 +1,14 @@
 
-all: Playground.hs run_tests.hs
-	ghc run_tests.hs -o playground
+FILES = Playground.hs run_tests.hs
+BIN = playground
 
-run: all
-	./playground
+all: playground
+
+playground: $(FILES)
+	ghc run_tests.hs -o $(BIN) 
+
+run: playground
+	./$(BIN)
 
 clean:
-	rm playground *.hi *.o
+	rm $(BIN) *.hi *.o
