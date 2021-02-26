@@ -103,6 +103,9 @@ sum' :: (Num a) => [a] -> a
 sum' [] = 0
 sum' (x:xs) = x + sum' xs
 
+sum'' :: (Num a) => [a] -> a
+sum'' = foldl (\acc x -> acc + x) 0
+
 product' :: (Num a) => [a] -> a
 product' [] = 1
 product' (x:xs) = x * product' xs
@@ -252,9 +255,16 @@ zipWith' f (x:xs) (y:ys) = f x y : zipWith' f xs ys
 flip' :: (a -> b -> c) -> b -> a -> c
 flip' f x y = f y x
 
+flip'' :: (a -> b -> c) -> b -> a -> c
+flip'' f = \x y -> f y x
+
 map' :: (a -> b) -> [a] -> [b]
 map' _ [] = []
 map' f (x:xs) = f x : map' f xs
+
+map'' :: (a -> b) -> [a] -> [b]
+map'' _ [] = []
+map'' f xs = foldr (\x acc -> f x : acc) [] xs
 
 filter' :: (a -> Bool) -> [a] -> [a]
 filter' _ [] = []
@@ -265,3 +275,31 @@ filter' f (x:xs) = if f x then x : filter' f xs
 largestDivisble :: (Integral a) => a
 largestDivisble = head $ filter d [99999,99998..]
     where d x = x `mod` 3829 == 0
+
+
+takeWhile' :: (a -> Bool) -> [a] -> [a]
+takeWhile' _ [] = []
+takeWhile' f (x:xs) = if f x then x : takeWhile' f xs
+                      else []
+
+foldl' :: (b -> a -> b) -> b -> [a] -> b
+foldl' _ acc [] = acc
+foldl' f acc (x:xs) = foldl' f (f acc x) xs
+
+foldr' :: (a -> b -> b) -> b -> [a] -> b
+foldr' _ acc [] = acc
+foldr' f acc (x:xs) = f x (foldr' f acc xs) 
+
+foldl1' :: (a -> a -> a) -> [a] -> a
+foldl1' _ [] = error "foldl1 empty list"
+foldl1' _ [x] = x
+foldl1' f (x:xs) = fldl f x xs
+    where fldl g acc l = if null l then acc
+                         else fldl g (g acc (head l)) (tail l)
+
+scanl' :: (b -> a -> b) -> b -> [a] -> [b]
+scanl' _ acc [] = [acc]
+scanl' f acc (x:xs) = acc : scanl' f (f acc x) xs
+
+
+
