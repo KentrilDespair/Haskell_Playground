@@ -2,7 +2,7 @@
 all: Playground.hs run_tests.hs
 	ghc run_tests.hs -o playground
 
-run:
+run: all
 	./playground
 
 clean:
