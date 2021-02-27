@@ -48,6 +48,9 @@ vecCmp (Vector x y) (Vector u v)
 vecNeg :: (Num a) => Vector a -> Vector a
 vecNeg (Vector x y) = Vector (-x) (-y)
 
+vecAbs :: (Num a) => Vector a -> Vector a
+vecAbs (Vector x y) = Vector (abs x) (abs y)
+
 vecLength :: (Floating a) => Vector a -> a
 vecLength (Vector x y) = sqrt $ x^2 + y^2
 
@@ -57,6 +60,16 @@ vecNormalize v@(Vector x y) = Vector (x / len) (y / len)
 
 vecDot :: (Num a) => Vector a -> Vector a -> a
 vecDot (Vector x y) (Vector u v) = x*u + y*v
+
+instance (Num a) => Num (Vector a) where
+    (+) u v = vecAdd u v
+    (-) u v = vecSub u v
+    (*) u (Vector x y) = vecMul u x
+    negate u = vecNeg u
+    abs u = vecAbs u
+    signum _ = error "undefined"
+    fromInteger _ = error "undefined"
+
 
 --------------------------------------------------------------------------------
 -- Vector3 functions
@@ -94,3 +107,5 @@ vec3Dot (Vector3 x y z) (Vector3 u v w) = x*u + y*v + z*w
 
 vec3Cross :: (Num a) => Vector3 a -> Vector3 a -> Vector3 a
 vec3Cross (Vector3 x y z) (Vector3 u v w) = Vector3 (y*w - z*v) (z*u - x*w) (x*v - y*u)
+
+

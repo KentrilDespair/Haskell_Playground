@@ -55,6 +55,12 @@ reverse' :: [a] -> [a]
 reverse' [] = []
 reverse' (x:xs) = reverse' xs ++ [x]
 
+-- Reverse in O(n)
+rev :: [a] -> [a]
+rev xs = rev' xs []
+    where rev' [] ys = ys
+          rev' (x:xs) ys = rev' xs (x:ys)
+
 take' :: (Num i, Ord i) => i -> [a] -> [a]
 take' n _
     | n <= 0 = []
@@ -298,4 +304,7 @@ foldl1' f (x:xs) = fldl f x xs
 scanl' :: (b -> a -> b) -> b -> [a] -> [b]
 scanl' _ acc [] = [acc]
 scanl' f acc (x:xs) = acc : scanl' f (f acc x) xs
+
+
+
 
