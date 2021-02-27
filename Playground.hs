@@ -2,8 +2,6 @@
 module Playground
 where
 
-
-
 min' :: (Ord a) => a -> a -> a
 min' x y = if x <= y then x 
                      else y
@@ -171,10 +169,10 @@ toUpper c = if isLower c then upperList !! elemIndex c lowerList
                          else c
 
 strToLower :: String -> String
-strToLower s = map toLower s
+strToLower = map toLower
 
 strToUpper :: String -> String
-strToUpper s = map toUpper s
+strToUpper = map toUpper
 
 --------------------------------------------------------------------------------
 -- Syntax in functions
@@ -300,6 +298,4 @@ foldl1' f (x:xs) = fldl f x xs
 scanl' :: (b -> a -> b) -> b -> [a] -> [b]
 scanl' _ acc [] = [acc]
 scanl' f acc (x:xs) = acc : scanl' f (f acc x) xs
-
-
 
