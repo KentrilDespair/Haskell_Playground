@@ -1,6 +1,7 @@
 
 import Playground
 import Vector
+import qualified Tree as T
 
 
 --test :: (Num b) => a -> b
@@ -128,9 +129,26 @@ testVector x
                                      /= 74.0 = error "vecDot"
     | Vector3 2 9 3 `vec3Mul` (Vector3 4 9 5 `vec3Dot` Vector3 9 2 4)
                                      /= Vector3 148 666 222 = error "vecMul or vecDot"
-    | otherwise = "All ok"
+    | otherwise = "Vector: All ok"
+
+testTree x
+    | T.singleton 5 /= (T.Node 5 T.EmptyTree T.EmptyTree) 
+        = error "singleton"
+    | T.fromList [5,3,1,2,4] /= 
+        T.Node 4 (T.Node 2 (T.singleton 1) (T.singleton 3)) (T.singleton 5)
+        = error "fromList"
+    | T.inorder tree1 /= [1,2,3,4,5] = error "inorder"
+    | T.preorder tree1 /= [4,2,1,3,5] = error "preorder"
+    | T.postorder tree1 /= [1,3,2,5,4] = error "postorder"
+    | otherwise = "Tree: All ok"
+    where tree1 = T.fromList[5,3,1,2,4]
+
+
 
 main = do
     putStrLn "Running tests ..."
     print $ test 1
+    print $ testVector 1
+    print $ testTree 1
+
 
