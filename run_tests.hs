@@ -113,18 +113,21 @@ test x
     | otherwise = "All ok"
 
 testVector x
-    | Vector 3 5 `vecAdd` Vector 9 2 /= Vector 12 7 = error "vecAdd"
-    | Vector 3 9 `vecMul` 10 /= Vector 30 90 = error "vecMul"
-    | Vector 4 9 `vecDot` Vector 9.0 2.0 /= 54.0 = error "vecDot"
+    | Vector 3 5 `vecAdd` Vector 9 2 /= Vector 12 7  = error "vecAdd"
+    | Vector 3 9 `vecMul` 10         /= Vector 30 90 = error "vecMul"
+    | Vector 4 9 `vecDot` Vector 9.0 2.0 
+                                     /= 54.0         = error "vecDot"
     | Vector 2 9 `vecMul` (Vector 4 9 `vecDot` Vector 9 2)
-        /= Vector 108 486 = error "vecMul or vecDot"
-    | Vector3 3 5 8 `vec3Add` Vector3 9 2 8 /= Vector3 12 7 16 = error "vecAdd"
+                                     /= Vector 108 486 = error "vecMul or vecDot"
+    | Vector3 3 5 8 `vec3Add` Vector3 9 2 8 
+                                     /= Vector3 12 7 16 = error "vecAdd"
     | Vector3 3 5 8 `vec3Add` Vector3 9 2 8 `vec3Add` Vector3 0 2 3 
-        /= Vector3 12 9 19 = error "vecAdd"
-    | Vector3 3 9 7 `vec3Mul` 10 /= Vector3 30 90 70 = error "vecMul"
-    | Vector3 4 9 5 `vec3Dot` Vector3 9.0 2.0 4.0 /= 74.0 = error "vecDot"
+                                     /= Vector3 12 9 19 = error "vecAdd"
+    | Vector3 3 9 7 `vec3Mul` 10     /= Vector3 30 90 70 = error "vecMul"
+    | Vector3 4 9 5 `vec3Dot` Vector3 9.0 2.0 4.0 
+                                     /= 74.0 = error "vecDot"
     | Vector3 2 9 3 `vec3Mul` (Vector3 4 9 5 `vec3Dot` Vector3 9 2 4)
-        /= Vector3 148 666 222 = error "vecMul or vecDot"
+                                     /= Vector3 148 666 222 = error "vecMul or vecDot"
     | otherwise = "All ok"
 
 main = do
