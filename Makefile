@@ -1,5 +1,5 @@
 
-FILES = Playground.hs run_tests.hs
+FILES = Playground.hs run_tests.hs Vector.hs
 BIN = playground
 
 all: playground
