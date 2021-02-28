@@ -51,11 +51,16 @@ postorder EmptyTree = []
 postorder (Node a left right) = postorder left ++ postorder right ++ [a]
 
 -- Returns a node with that value
-search :: (Ord a) => a -> Tree a -> Maybe (Tree a)
-search x EmptyTree = Nothing
-search x tree@(Node a left right)
+find :: (Ord a) => a -> Tree a -> Maybe (Tree a)
+find x EmptyTree = Nothing
+find x tree@(Node a left right)
     | x == a = Just tree
     | x < a = search x left
     | x > a = search x right
+
+instance Functor Tree where
+    fmap f EmptyTree = EmptyTree
+    fmap f (Node a left right) = Node (f a) (fmap f left) (fmap f right)
+
 
 
