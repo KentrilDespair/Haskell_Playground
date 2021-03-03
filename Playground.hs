@@ -306,5 +306,21 @@ scanl' _ acc [] = [acc]
 scanl' f acc (x:xs) = acc : scanl' f (f acc x) xs
 
 
+--------------------------------------------------------------------------------
+-- functions working with I/O Actions
 
+putStr' :: String -> IO ()
+putStr' [] = return ()
+putStr' (x:xs) = do
+    putChar x 
+    putStr' xs
+
+putStrLn' :: String -> IO ()
+putStrLn' [] = putChar '\n'
+putStrLn' (x:xs) = do
+    putChar x 
+    putStrLn' xs
+
+print' :: (Show a) => a -> IO ()
+print' = putStrLn . show 
 
