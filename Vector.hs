@@ -23,6 +23,22 @@ module Vector
 -- A 2D vector
 data Vector a = Vector a a deriving (Show, Eq)
 
+instance (Num a) => Num (Vector a) where
+    (+) u v = vecAdd u v
+    (-) u v = vecSub u v
+    (*) u (Vector x y) = vecMul u x
+    negate u = vecNeg u
+    abs u = vecAbs u
+    signum _ = error "undefined"
+    fromInteger _ = error "undefined"
+
+-- E.g.: read "(x, y)" :: Vector Int 
+instance (Read a) => Read (Vector a) where
+    readsPrec _ s =
+        let first = takeWhile (/= ',') . tail
+            second = tail . dropWhile (/= ',') . init
+        in (\str -> [(Vector (read (first s)) (read (second s)), "")]) s
+
 -- A 3D vector
 data Vector3 a = Vector3 a a a deriving (Show, Eq)
 
@@ -59,17 +75,7 @@ vecNormalize v@(Vector x y) = Vector (x / len) (y / len)
     where len = vecLength v
 
 vecDot :: (Num a) => Vector a -> Vector a -> a
-vecDot (Vector x y) (Vector u v) = x*u + y*v
-
-instance (Num a) => Num (Vector a) where
-    (+) u v = vecAdd u v
-    (-) u v = vecSub u v
-    (*) u (Vector x y) = vecMul u x
-    negate u = vecNeg u
-    abs u = vecAbs u
-    signum _ = error "undefined"
-    fromInteger _ = error "undefined"
-
+vecDot (Vector x y) (Vector u v) = x*u + y*v 
 
 --------------------------------------------------------------------------------
 -- Vector3 functions
