@@ -2,7 +2,7 @@
 Learning functional programming in Haskell
 
 # Requirements
-Make
+Make  
 GHC
 
 # How to run
