@@ -1,11 +1,11 @@
 # Haskell_Playground
 Learning functional programming in Haskell
 
-# Requirements
+## Requirements
 Make  
 GHC
 
-# How to run
+## How to run
   $ make  
   $ ./playground  
 or  
