@@ -306,6 +306,20 @@ scanl' _ acc [] = [acc]
 scanl' f acc (x:xs) = acc : scanl' f (f acc x) xs
 
 
+splitBy :: Char -> String -> [String]
+splitBy _ [] = []
+splitBy d str = prev : if null rest then [] 
+                                    else splitBy d (tail rest)
+    where (prev, rest) = span (/= d) str
+
+-- Takes rest of the elements from index 
+takeFrom :: Int -> [a] -> [a]
+takeFrom _ [] = []
+takeFrom n all@(x:xs)
+    | n <= 0 = all
+    | otherwise = takeFrom (n-1) xs
+
+
 --------------------------------------------------------------------------------
 -- functions working with I/O Actions
 

@@ -111,6 +111,13 @@ test x
     | foldl1' (-) [2,3,4] /= (-5)  = error "foldl"
     | scanl' (+) 0 [] /= [0]               = error "scanl"
     | scanl' (-) 0 [1,2,3] /= [0,-1,-3,-6] = error "scanl"
+    | splitBy ',' "1,2,3,4" /= ["1","2","3","4"] = error "splitby"
+    | (null $ takeFrom 2 []) /= True = error "takeFrom"
+    | takeFrom (-1) ["hee", "loo", "la"] /= ["hee", "loo", "la"] = error "takeFrom"
+    | takeFrom (0) ["hee", "loo", "la"] /= ["hee", "loo", "la"] = error "takeFrom"
+    | takeFrom (1) ["hee", "loo", "la"] /= ["loo", "la"] = error "takeFrom"
+    | takeFrom (2) ["hee", "loo", "la"] /= ["la"] = error "takeFrom"
+    | (null $ takeFrom (3) []) /= True = error "takeFrom"
     | otherwise = "All ok"
 
 testVector x

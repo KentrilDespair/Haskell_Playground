@@ -55,8 +55,8 @@ find :: (Ord a) => a -> Tree a -> Maybe (Tree a)
 find x EmptyTree = Nothing
 find x tree@(Node a left right)
     | x == a = Just tree
-    | x < a = search x left
-    | x > a = search x right
+    | x < a = find x left
+    | x > a = find x right
 
 instance Functor Tree where
     fmap f EmptyTree = EmptyTree
